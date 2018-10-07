@@ -65,10 +65,17 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Search Title"
         self.tableView.register(UINib(nibName: "MovieTableViewCell", bundle: nil), forCellReuseIdentifier: movieTableViewCellIdentifier)
+        let footerView = UIView(frame: .zero)
+        footerView.backgroundColor = UIColor.darkGray
+        tableView.tableFooterView = UIView(frame: .zero)
+        searchBar.becomeFirstResponder()
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     // MARK: MovieListDisplayLogic
 
     func displayMovies(viewModel: ListMovies.FetchMovies.MovieListViewModel) {

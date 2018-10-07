@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = MovieListViewController.init(nibName: "MovieListViewController", bundle: nil)
         let navigationController = UINavigationController.init(rootViewController: viewController)
+        navigationController.navigationBar.barStyle = .black
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         return true

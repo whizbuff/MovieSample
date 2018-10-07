@@ -24,10 +24,9 @@ class MovieDetailsInteractor: MovieDetailsBusinessLogic, MovieDetailsDataStore {
     var presenter: MovieDetailsPresentationLogic?
     var worker: MovieDetailsWorker?
     var movie: Movie!
-    
-    // MARK: Do something
-    
+        
     func getMovieDetails() {
+        //TODO: move end point
         let url = "http://www.omdbapi.com/?i=\(movie.imdbID)&apikey=9e255b1a"
         guard let queryEncodedString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let requestURL = URL(string:queryEncodedString) else {

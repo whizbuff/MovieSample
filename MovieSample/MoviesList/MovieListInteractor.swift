@@ -37,8 +37,8 @@ class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
             return
         }
        
-        //TODO: move links to
         let pageOffset = pageOffet(offset)
+        //TODO: move end point
         let url = "http://www.omdbapi.com/?s=\(searchTerm)&page=\(pageOffset)&apikey=9e255b1a"
         guard let queryEncodedString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let requestURL = URL(string:queryEncodedString) else {

@@ -22,12 +22,11 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     var router: (NSObjectProtocol & MovieDetailsRoutingLogic & MovieDetailsDataPassing)?
     
     @IBOutlet weak var posterImageView: UIImageView!
-    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var metaDataContainerView: UIView!
     @IBOutlet weak var actorLabel: UILabel!
     @IBOutlet weak var plotLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
-    
     
     // MARK: Object lifecycle
     
@@ -65,12 +64,13 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     }
 
     func getMovieDetails() {
+        loadingIndicator.startAnimating()
         interactor?.getMovieDetails()//id: router!.dataStore!.movie.imdbID
     }
     
     func display(viewModel: MovieDetails.MetaData.ViewModel) {
         let movieInfo = viewModel.info
-        
+        loadingIndicator.stopAnimating()
         actorLabel.text = movieInfo.Actors
         plotLabel.text = movieInfo.Plot
         ratingLabel.text = movieInfo.imdbRating
@@ -80,6 +80,14 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     }
     
     func displayError(error: Error) {
+        loadingIndicator.startAnimating()
         
+        // TODO: move this duplicate code to extension or something
+        if  let _ = self.presentedViewController {
+            return
+        }
+        let alertController = UIAlertController(title:"Error", message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }

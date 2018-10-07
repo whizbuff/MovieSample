@@ -55,11 +55,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         
         presenter.viewController = self
         router.viewController = self
-        
     }
-    
-    // MARK: Routing
-    // TODO: ??? not needed
     
     // MARK: View lifecycle
     

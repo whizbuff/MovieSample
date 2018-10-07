@@ -69,8 +69,9 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
     }
     
     func display(viewModel: MovieDetails.MetaData.ViewModel) {
-        let movieInfo = viewModel.info
         loadingIndicator.stopAnimating()
+        
+        let movieInfo = viewModel.info
         actorLabel.text = movieInfo.Actors
         plotLabel.text = movieInfo.Plot
         ratingLabel.text = movieInfo.imdbRating

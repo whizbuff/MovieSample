@@ -20,7 +20,7 @@ protocol MovieListDisplayLogic: class{
 
 class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var interactor: MovieListBusinessLogic?
-    var router: (NSObjectProtocol & MovieListRoutingLogic)?
+    var router: (NSObjectProtocol & MovieListRoutingLogic & MovieListDataPassing)?
     var movies: [ListMovies.FetchMovies.MovieListViewModel.Movie] = []
     var alertController: UIAlertController?
     
@@ -54,7 +54,9 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         interactor.worker = MovieListWorker()
         
         presenter.viewController = self
+        
         router.viewController = self
+        router.dataStore = interactor
     }
     
     // MARK: View lifecycle
@@ -66,9 +68,16 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         let footerView = UIView(frame: .zero)
         footerView.backgroundColor = UIColor.darkGray
         tableView.tableFooterView = UIView(frame: .zero)
+        
         searchBar.becomeFirstResponder()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedRow, animated: true)
+        }
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -112,6 +121,10 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router?.routeToMovieDetails()
     }
 }
 

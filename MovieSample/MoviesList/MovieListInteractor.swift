@@ -16,11 +16,11 @@ protocol MovieListBusinessLogic {
     func fetchMovies(searchTerm: String, offset: Int)
 }
 
-protocol MovieListDataSource {
+protocol MovieListDataStore {
     var movies: [Movie]? { get }
 }
 
-class MovieListInteractor: MovieListBusinessLogic, MovieListDataSource {
+class MovieListInteractor: MovieListBusinessLogic, MovieListDataStore {
     var presenter: MovieListPresentationLogic?
     var dataTask: URLSessionDataTask?
     var searchMapping:[String:Int] = [:]

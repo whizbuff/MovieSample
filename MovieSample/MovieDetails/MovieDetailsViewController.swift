@@ -69,6 +69,7 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    self.view.backgroundColor = UIColor.black
     doSomething()
   }
   

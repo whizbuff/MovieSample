@@ -14,14 +14,14 @@ import UIKit
 import Kingfisher
 
 protocol MovieListDisplayLogic: class{
-    func displayMovies(viewModel: ListMovies.FetchMovies.MovieListViewModel)
+    func displayMovies(viewModel: ListMovies.FetchMovies.ViewModel)
     func displayError(error: Error)
 }
 
 class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var interactor: MovieListBusinessLogic?
     var router: (NSObjectProtocol & MovieListRoutingLogic & MovieListDataPassing)?
-    var movies: [ListMovies.FetchMovies.MovieListViewModel.Movie] = []
+    var movies: [ListMovies.FetchMovies.ViewModel.Movie] = []
     var alertController: UIAlertController?
     var activityIndicator: UIActivityIndicatorView?
     
@@ -90,8 +90,8 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
     }
     // MARK: MovieListDisplayLogic
 
-    func displayMovies(viewModel: ListMovies.FetchMovies.MovieListViewModel) {
-        movies.append(contentsOf: viewModel.Movies)
+    func displayMovies(viewModel: ListMovies.FetchMovies.ViewModel) {
+        movies.append(contentsOf: viewModel.movies)
         self.view.endEditing(true)
         tableView.reloadData()
         activityIndicator?.stopAnimating()

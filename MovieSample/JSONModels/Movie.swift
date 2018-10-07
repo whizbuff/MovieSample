@@ -26,3 +26,10 @@ struct MovieList: Decodable {
         }
     }
 }
+
+struct MovieMetaData: Codable {
+    let Actors: String
+    let Plot: String
+    let imdbRating: String
+    let Poster: String?
+}

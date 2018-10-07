@@ -12,68 +12,74 @@
 
 import UIKit
 
-protocol MovieDetailsDisplayLogic: class
-{
-  func displaySomething(viewModel: MovieDetails.Something.ViewModel)
+protocol MovieDetailsDisplayLogic: class {
+  func display(viewModel: MovieDetails.MetaData.ViewModel)
+  func displayError(error: Error)
 }
 
-class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
-{
-  var interactor: MovieDetailsBusinessLogic?
-  var router: (NSObjectProtocol & MovieDetailsRoutingLogic & MovieDetailsDataPassing)?
-
+class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic {
+    var interactor: MovieDetailsBusinessLogic?
+    var router: (NSObjectProtocol & MovieDetailsRoutingLogic & MovieDetailsDataPassing)?
+    
     @IBOutlet weak var posterImageView: UIImageView!
+    
     @IBOutlet weak var metaDataContainerView: UIView!
+    @IBOutlet weak var actorLabel: UILabel!
+    @IBOutlet weak var plotLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    
+    
     // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = MovieDetailsInteractor()
-    let presenter = MovieDetailsPresenter()
-    let router = MovieDetailsRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    getMovieDetails()
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func getMovieDetails()
-  {
-    let request = MovieDetails.Something.Request()
-    interactor?.getMovie(request: request)
-  }
-  
-  func displaySomething(viewModel: MovieDetails.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = MovieDetailsInteractor()
+        let presenter = MovieDetailsPresenter()
+        let router = MovieDetailsRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = router?.dataStore?.movie.Title
+        getMovieDetails()
+    }
+
+    func getMovieDetails() {
+        interactor?.getMovieDetails()//id: router!.dataStore!.movie.imdbID
+    }
+    
+    func display(viewModel: MovieDetails.MetaData.ViewModel) {
+        let movieInfo = viewModel.info
+        
+        actorLabel.text = movieInfo.Actors
+        plotLabel.text = movieInfo.Plot
+        ratingLabel.text = movieInfo.imdbRating
+        if let imageURL = movieInfo.Poster {
+            posterImageView.kf.setImage(with: URL(string: imageURL))
+        }
+    }
+    
+    func displayError(error: Error) {
+        
+    }
 }

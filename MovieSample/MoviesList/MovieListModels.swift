@@ -19,14 +19,14 @@ enum ListMovies {
             var movies: [Movie]
         }
         
-        struct MovieListViewModel {
+        struct ViewModel {
             struct Movie {
                 var title: String
                 var year: String
                 var poster: String?
             }
             
-            var Movies: [Movie]
+            var movies: [ListMovies.FetchMovies.ViewModel.Movie]
         }
     }
 }

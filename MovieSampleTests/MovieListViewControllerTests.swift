@@ -29,10 +29,10 @@ class MovieListViewControllerTests: XCTestCase {
         RunLoop.current.run(until: Date())
         
         // When
-        var movies: [ListMovies.FetchMovies.MovieListViewModel.Movie] = []
-        let viewModel = ListMovies.FetchMovies.MovieListViewModel.Movie.init(title: "Test Title", year: "2018", poster: nil)
+        var movies: [ListMovies.FetchMovies.ViewModel.Movie] = []
+        let viewModel = ListMovies.FetchMovies.ViewModel.Movie.init(title: "Test Title", year: "2018", poster: nil)
         movies.append(viewModel)
-        let moviesViewModel = ListMovies.FetchMovies.MovieListViewModel.init(Movies: movies)
+        let moviesViewModel = ListMovies.FetchMovies.ViewModel.init(Movies: movies)
         
         sut.displayMovies(viewModel: moviesViewModel)
         

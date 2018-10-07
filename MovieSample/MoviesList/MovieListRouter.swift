@@ -47,7 +47,7 @@ class MovieListRouter: NSObject, MovieListRoutingLogic, MovieListDataPassing {
     
     func passData(from source: MovieListDataStore , destination: inout MovieDetailsDataStore)
     {
-        //let selectedRow = viewController!.tableView.indexPathForSelectedRow!.row
-        //destination.movie = source.movies![selectedRow]
+        let selectedRow = viewController!.tableView.indexPathForSelectedRow!.row
+        destination.movie = source.movies![selectedRow]
     }
 }

@@ -22,13 +22,15 @@ class MovieListPresenter: MovieListPresentationLogic {
     
     // MARK: Movies list
     func presentMovies(response: ListMovies.FetchMovies.Response) {
-        var movies: [ListMovies.FetchMovies.MovieListViewModel.Movie] = []
+        var movies: [ListMovies.FetchMovies.ViewModel.Movie] = []
         for movie in response.movies {
-            let viewModel = ListMovies.FetchMovies.MovieListViewModel.Movie.init(title: movie.Title, year: movie.Year, poster: movie.Poster)
+            let viewModel = ListMovies.FetchMovies.ViewModel.Movie.init(title: movie.Title, year: movie.Year, poster: movie.Poster)
             movies.append(viewModel)
         }
         
-        let moviesViewModel = ListMovies.FetchMovies.MovieListViewModel.init(Movies: movies)
+//        let moviesViewModel = ListMovies.FetchMovies.ViewModel.init(movies: movies)
+        let moviesViewModel = ListMovies.FetchMovies.ViewModel.init(movies: movies)
+        
         DispatchQueue.main.async { [weak self] in
             self?.viewController?.displayMovies(viewModel: moviesViewModel)
         }

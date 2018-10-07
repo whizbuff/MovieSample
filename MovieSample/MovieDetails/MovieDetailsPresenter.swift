@@ -12,20 +12,28 @@
 
 import UIKit
 
-protocol MovieDetailsPresentationLogic
-{
-  func presentSomething(response: MovieDetails.Something.Response)
+protocol MovieDetailsPresentationLogic {
+    func presentMovieDetails(response: MovieDetails.MetaData.Response)
+    func presentError(error: Error)
 }
 
-class MovieDetailsPresenter: MovieDetailsPresentationLogic
-{
-  weak var viewController: MovieDetailsDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: MovieDetails.Something.Response)
-  {
-    let viewModel = MovieDetails.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class MovieDetailsPresenter: MovieDetailsPresentationLogic {
+    weak var viewController: MovieDetailsDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentMovieDetails(response: MovieDetails.MetaData.Response) {
+        let movieMetaData = response.movieMetaData
+        let viewModel = MovieDetails.MetaData.ViewModel.Info.init(Actors: movieMetaData.Actors, Plot: movieMetaData.Plot, imdbRating: movieMetaData.imdbRating, Poster: movieMetaData.Poster)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.display(viewModel: MovieDetails.MetaData.ViewModel.init(info: viewModel))
+        }
+    }
+    
+    func presentError(error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.displayError(error: error)
+        }
+    }
 }

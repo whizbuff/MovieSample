@@ -16,11 +16,16 @@ protocol MovieListBusinessLogic {
     func fetchMovies(searchTerm: String, offset: Int)
 }
 
-class MovieListInteractor: MovieListBusinessLogic {
+protocol MovieListDataSource {
+    var movies: [Movie]? { get }
+}
+
+class MovieListInteractor: MovieListBusinessLogic, MovieListDataSource {
     var presenter: MovieListPresentationLogic?
     var dataTask: URLSessionDataTask?
     var searchMapping:[String:Int] = [:]
     var worker: MovieListWorker?
+    var movies: [Movie]? = []
     
     func pageOffet(_ moviesCount: Int) -> Int {
         return moviesCount/10 + 1
@@ -33,7 +38,8 @@ class MovieListInteractor: MovieListBusinessLogic {
         }
        
         //TODO: move links to
-        let url = "http://www.omdbapi.com/?s=\(searchTerm)&page=\(pageOffet(offset))&apikey=9e255b1a"
+        let pageOffset = pageOffet(offset)
+        let url = "http://www.omdbapi.com/?s=\(searchTerm)&page=\(pageOffset)&apikey=9e255b1a"
         guard let queryEncodedString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let requestURL = URL(string:queryEncodedString) else {
             return
@@ -44,6 +50,11 @@ class MovieListInteractor: MovieListBusinessLogic {
             case .success(let movieList):
                     self?.searchMapping[searchTerm] = Int(movieList.totalResults)
                     let response = ListMovies.FetchMovies.Response(movies: movieList.movies)
+                    if pageOffset == 0  {
+                        self?.movies = movieList.movies
+                    } else {
+                        self?.movies?.append(contentsOf: movieList.movies)
+                    }
                     self?.presenter?.presentMovies(response: response)
             case .failure(let error):
                     self?.presenter?.fetchingMoviesFailed(error: error)

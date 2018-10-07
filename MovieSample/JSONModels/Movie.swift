@@ -12,6 +12,7 @@ struct Movie: Codable {
     let Title: String
     let Year: String
     let Poster: String?
+    let imdbID: String
 }
 
 struct MovieList: Decodable {

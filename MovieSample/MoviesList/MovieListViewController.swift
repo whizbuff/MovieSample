@@ -71,9 +71,12 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         tableView.tableFooterView = UIView(frame: .zero)
         
         searchBar.becomeFirstResponder()
+        
         activityIndicator = UIActivityIndicatorView.init(activityIndicatorStyle: .white)
         let rightBarButtonItem = UIBarButtonItem.init(customView: activityIndicator!)
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor.lightGray
     }
 
     override func viewWillAppear(_ animated: Bool) {

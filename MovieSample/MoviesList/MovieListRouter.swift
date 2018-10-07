@@ -29,7 +29,7 @@ class MovieListRouter: NSObject, MovieListRoutingLogic, MovieListDataPassing {
     
     func routeToMovieDetails()
     {
-        let destinationVC = MovieDetailsViewController.init(nibName: nil, bundle: nil)
+        let destinationVC = MovieDetailsViewController.init(nibName: "MovieDetailsViewController", bundle: nil)
         var destinationDS = destinationVC.router!.dataStore!
         
         passData(from: dataStore!, destination: &destinationDS)

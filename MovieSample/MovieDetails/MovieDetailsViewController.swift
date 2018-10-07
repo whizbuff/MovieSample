@@ -22,7 +22,9 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
   var interactor: MovieDetailsBusinessLogic?
   var router: (NSObjectProtocol & MovieDetailsRoutingLogic & MovieDetailsDataPassing)?
 
-  // MARK: Object lifecycle
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var metaDataContainerView: UIView!
+    // MARK: Object lifecycle
   
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
@@ -52,32 +54,19 @@ class MovieDetailsViewController: UIViewController, MovieDetailsDisplayLogic
     router.dataStore = interactor
   }
   
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
-    }
-  }
-  
   // MARK: View lifecycle
   
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    self.view.backgroundColor = UIColor.black
-    doSomething()
+    getMovieDetails()
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
+  func getMovieDetails()
   {
     let request = MovieDetails.Something.Request()
     interactor?.getMovie(request: request)

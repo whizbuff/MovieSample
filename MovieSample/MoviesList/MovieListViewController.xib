@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MovieListViewController" customModule="MovieSample" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="Wmh-kB-jLB" id="hJj-Pg-bxG"/>
+                <outlet property="tableView" destination="LEu-Jc-fEV" id="dcy-y0-enY"/>
+                <outlet property="view" destination="yrf-1S-DfL" id="D6L-i8-mdZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="yrf-1S-DfL">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="prominent" translatesAutoresizingMaskIntoConstraints="NO" id="Wmh-kB-jLB">
+                    <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="nTF-Ti-Gs4"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LEu-Jc-fEV">
+                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" red="0.34797350890000001" green="0.34797350890000001" blue="0.34797350890000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="mZq-Va-sJe"/>
+                        <outlet property="delegate" destination="-1" id="JeL-eD-5gE"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="LEu-Jc-fEV" firstAttribute="top" secondItem="Wmh-kB-jLB" secondAttribute="bottom" id="81Q-qN-yRc"/>
+                <constraint firstItem="cvO-C9-zFB" firstAttribute="trailing" secondItem="Wmh-kB-jLB" secondAttribute="trailing" id="YCZ-qk-LO2"/>
+                <constraint firstItem="Wmh-kB-jLB" firstAttribute="leading" secondItem="cvO-C9-zFB" secondAttribute="leading" id="d0F-zc-O19"/>
+                <constraint firstItem="LEu-Jc-fEV" firstAttribute="bottom" secondItem="cvO-C9-zFB" secondAttribute="bottom" id="ecD-ur-Tag"/>
+                <constraint firstItem="Wmh-kB-jLB" firstAttribute="top" secondItem="cvO-C9-zFB" secondAttribute="top" id="hhT-yc-JXX"/>
+                <constraint firstItem="cvO-C9-zFB" firstAttribute="trailing" secondItem="LEu-Jc-fEV" secondAttribute="trailing" id="iDj-kw-4yL"/>
+                <constraint firstItem="LEu-Jc-fEV" firstAttribute="leading" secondItem="cvO-C9-zFB" secondAttribute="leading" id="qTw-XA-ZUo"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="cvO-C9-zFB"/>
+        </view>
+    </objects>
+</document>

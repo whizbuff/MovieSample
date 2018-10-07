@@ -23,6 +23,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
     var router: (NSObjectProtocol & MovieListRoutingLogic & MovieListDataPassing)?
     var movies: [ListMovies.FetchMovies.MovieListViewModel.Movie] = []
     var alertController: UIAlertController?
+    var activityIndicator: UIActivityIndicatorView?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -70,6 +71,9 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         tableView.tableFooterView = UIView(frame: .zero)
         
         searchBar.becomeFirstResponder()
+        activityIndicator = UIActivityIndicatorView.init(activityIndicatorStyle: .white)
+        let rightBarButtonItem = UIBarButtonItem.init(customView: activityIndicator!)
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +91,7 @@ class MovieListViewController: UIViewController, MovieListDisplayLogic, UITableV
         movies.append(contentsOf: viewModel.Movies)
         self.view.endEditing(true)
         tableView.reloadData()
+        activityIndicator?.stopAnimating()
     }
     
     func displayError(error: Error) {
@@ -139,10 +144,12 @@ extension MovieListViewController {
         guard  let searchTerm = searchBar.text else {
             return
         }
+        activityIndicator?.startAnimating()
         interactor?.fetchMovies(searchTerm: searchTerm, offset: movies.count)
     }
     
     func presentError(_ error: Error) {
+        activityIndicator?.stopAnimating()
         if  let _ = self.presentedViewController {
             return
         }

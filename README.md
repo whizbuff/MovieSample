@@ -10,7 +10,7 @@
 - [x] Movie details
 - [x] Error Handling
 - [ ] Network Reachability(intergration yes. havent implemented the usage)
-- [x] Unit Test Coverage
+- [x] Unit Test Coverage for Movies list and Not Movie  Details
 - [x] Moives list and Details screen with
 - [x] Interactor
 - [x] Presenter

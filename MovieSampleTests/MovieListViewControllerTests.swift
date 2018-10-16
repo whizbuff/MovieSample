@@ -32,7 +32,7 @@ class MovieListViewControllerTests: XCTestCase {
         var movies: [ListMovies.FetchMovies.ViewModel.Movie] = []
         let viewModel = ListMovies.FetchMovies.ViewModel.Movie.init(title: "Test Title", year: "2018", poster: nil)
         movies.append(viewModel)
-        let moviesViewModel = ListMovies.FetchMovies.ViewModel.init(Movies: movies)
+        let moviesViewModel = ListMovies.FetchMovies.ViewModel.init(movies: movies)
         
         sut.displayMovies(viewModel: moviesViewModel)
         

@@ -14,7 +14,6 @@
 		9645A9692169221A00701678 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645A9512169221900701678 /* Movie.swift */; };
 		9645A96A2169221A00701678 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9645A9522169221900701678 /* LaunchScreen.storyboard */; };
 		9645A96B2169221A00701678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645A9542169221900701678 /* AppDelegate.swift */; };
-		9645A96C2169221A00701678 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9645A9552169221900701678 /* Info.plist */; };
 		9645A96D2169221A00701678 /* MovieListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645A9572169221900701678 /* MovieListInteractor.swift */; };
 		9645A96E2169221A00701678 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9645A9582169221900701678 /* MovieListViewController.swift */; };
 		9645A96F2169221A00701678 /* MovieListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9645A9592169221900701678 /* MovieListViewController.xib */; };
@@ -320,7 +319,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = rajesh.rao;
 				TargetAttributes = {
 					9645A8FB2168DF0E00701678 = {
@@ -362,7 +361,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9645A96C2169221A00701678 /* Info.plist in Resources */,
 				9645A96A2169221A00701678 /* LaunchScreen.storyboard in Resources */,
 				9645A9732169221A00701678 /* MovieTableViewCell.xib in Resources */,
 				9645A9682169221A00701678 /* Assets.xcassets in Resources */,
